@@ -12,3 +12,7 @@ libraryDependencies ++= Seq(
   cache,
   ws
 )
+
+seq(cxf.settings : _*)
+
+cxf.wsdls := Seq(cxf.Wsdl(file("wsdls/cxftest2.wsdl"), Nil, None))

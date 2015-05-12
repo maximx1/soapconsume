@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.demo/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="ServiceEndpointImplService" targetNamespace="http://service.demo/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.demo/" elementFormDefault="unqualified" targetNamespace="http://service.demo/" version="1.0">
+
+  <xs:element name="sample" type="tns:sample"/>
+
+  <xs:element name="sampleResponse" type="tns:sampleResponse"/>
+
+  <xs:complexType name="sample">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:inTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="inTO">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"/>
+      <xs:element name="requestedDescription" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sampleResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:outTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="outTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="details" type="xs:string"/>
+      <xs:element name="id" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="sampleResponse">
+    <wsdl:part element="tns:sampleResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sample">
+    <wsdl:part element="tns:sample" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ServiceEndpoint">
+    <wsdl:operation name="sample">
+      <wsdl:input message="tns:sample" name="sample">
+    </wsdl:input>
+      <wsdl:output message="tns:sampleResponse" name="sampleResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceEndpointImplServiceSoapBinding" type="tns:ServiceEndpoint">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sample">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="sample">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sampleResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceEndpointImplService">
+    <wsdl:port binding="tns:ServiceEndpointImplServiceSoapBinding" name="ServiceEndpointImplPort">
+      <soap:address location="http://localhost:8080/cxftest2/services/sample"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
